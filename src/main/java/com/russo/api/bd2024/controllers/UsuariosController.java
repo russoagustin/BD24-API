@@ -9,8 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("BD2024")
-@CrossOrigin(origins = "http://localhost:5500") // Permite solicitudes desde localhost:3000
-public class Controller {
+public class UsuariosController {
 
     UsuarioRepository repositorio = UsuarioRepository.getInstance();
 
