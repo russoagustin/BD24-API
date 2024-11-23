@@ -20,7 +20,7 @@ public class UsuariosController {
         return usuarioOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/usuario")
+    @GetMapping("/usuario/")
     ResponseEntity<List<Map<String,Object>>> getUsuarios() throws SQLException {
         Optional<List<Map<String,Object>>> listaUsuariosOptional = repositorio.getUsuarios();
         return listaUsuariosOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

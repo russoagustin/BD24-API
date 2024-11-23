@@ -18,7 +18,7 @@ public class UsuarioRepository {
     public Optional<Map<String,Object>> findById(Integer id) throws SQLException {
         Connection con = Conexion.conexion();
         Optional<Map<String,Object>> usuarioOptional = Optional.empty();
-        String stringQuery = "SELECT nombre, apellido,email, user_name,dni FROM PERSONA " +
+        String stringQuery = "SELECT nombre, apellido,email, user_name, ocupacion FROM PERSONA " +
                 "INNER JOIN USUARIO ON PERSONA.idPERSONA = USUARIO.PERSONA_id " +
                 "INNER JOIN VIAJANTE ON PERSONA.idPERSONA = VIAJANTE.PERSONA_id " +
                 "WHERE dni = ?";
@@ -32,7 +32,7 @@ public class UsuarioRepository {
                 usuario.put("apellido",resultado.getString("apellido"));
                 usuario.put("email",resultado.getString("email"));
                 usuario.put("user_name",resultado.getString("user_name"));
-                usuario.put("dni",resultado.getString("dni"));
+                usuario.put("ocupacion",resultado.getString("ocupacion"));
                 usuarioOptional = Optional.of(usuario);
             }
             st.close();
@@ -47,7 +47,7 @@ public class UsuarioRepository {
         List<Map<String,Object>> listaUsuarios = new ArrayList<>();
         Optional<List<Map<String,Object>>> listaUsuariosOptional = Optional.empty();
         Optional<Map<String,Object>> usuarioOptional = Optional.empty();
-        String stringQuery = "SELECT nombre, apellido,email, user_name,dni FROM PERSONA " +
+        String stringQuery = "SELECT nombre, apellido,email, user_name, ocupacion FROM PERSONA " +
                 "INNER JOIN USUARIO ON PERSONA.idPERSONA = USUARIO.PERSONA_id " +
                 "INNER JOIN VIAJANTE ON PERSONA.idPERSONA = VIAJANTE.PERSONA_id ";
         try {
@@ -59,7 +59,7 @@ public class UsuarioRepository {
                 usuario.put("apellido",resultado.getString("apellido"));
                 usuario.put("email",resultado.getString("email"));
                 usuario.put("user_name",resultado.getString("user_name"));
-                usuario.put("dni",resultado.getString("dni"));
+                usuario.put("ocupacion",resultado.getString("ocupacion"));
                 listaUsuarios.add(usuario);
                 usuarioOptional = Optional.of(usuario);
             }
