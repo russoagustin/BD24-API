@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario y Tabla de Datos</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="container">
         <nav>
             <ul>
-            <li><a href="index.html">Usuarios</a></li>
-            <li><a href="paginas/restaurante.html">Restaurantes</a></li>
+            <li><a href="../index.html">Usuarios</a></li>
+            <li><a href="restaurante.html">Restaurantes</a></li>
             <li>Eventos</li>
             <li>Paquetes</li>
         </ul>
@@ -20,11 +20,11 @@
 
 
     <div class="form-container">
-        <h2>Buscar Usuario por DNI</h2>
+        <h2>Buscar Restaurantes</h2>
         <form id="dniForm">
             <div class="form-group">
-                <label for="dni">DNI:</label>
-                <input type="number" id="dni" name="dni" placeholder="Escribe el DNI" >
+                <label for="dni">Tipo de comida:</label>
+                <input type="text" id="dni" name="dni" placeholder="Ingrese el tipo de comida">
             </div>
             <button type="submit">Buscar</button>
         </form>
@@ -34,16 +34,15 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Ocupacion</th>
+                <th>Dirección</th>
+                <th>Hora de apertura</th>
+                <th>Hora de cierre</th>
             </tr>
         </thead>
         <tbody>
             <!-- Los datos serán insertados aquí dinámicamente -->
         </tbody>
     </table>
-    <script src="usuarios.js"></script>
+    <script src="restaurantes.js"></script>
 </body>
 </html>

@@ -18,10 +18,7 @@ public class UsuarioRepository {
     public Optional<Map<String,Object>> findById(Integer id) throws SQLException {
         Connection con = Conexion.conexion();
         Optional<Map<String,Object>> usuarioOptional = Optional.empty();
-        String stringQuery = "SELECT nombre, apellido,email, user_name, ocupacion FROM PERSONA " +
-                "INNER JOIN USUARIO ON PERSONA.idPERSONA = USUARIO.PERSONA_id " +
-                "INNER JOIN VIAJANTE ON PERSONA.idPERSONA = VIAJANTE.PERSONA_id " +
-                "WHERE dni = ?";
+        String stringQuery = "CALL obtener_usuario(?)";
         try {
             PreparedStatement st = con.prepareStatement(stringQuery);
             st.setInt(1,id);
@@ -47,9 +44,7 @@ public class UsuarioRepository {
         List<Map<String,Object>> listaUsuarios = new ArrayList<>();
         Optional<List<Map<String,Object>>> listaUsuariosOptional = Optional.empty();
         Optional<Map<String,Object>> usuarioOptional = Optional.empty();
-        String stringQuery = "SELECT nombre, apellido,email, user_name, ocupacion FROM PERSONA " +
-                "INNER JOIN USUARIO ON PERSONA.idPERSONA = USUARIO.PERSONA_id " +
-                "INNER JOIN VIAJANTE ON PERSONA.idPERSONA = VIAJANTE.PERSONA_id ";
+        String stringQuery = "CALL obtener_usuario(NULL)";
         try {
             PreparedStatement st = con.prepareStatement(stringQuery);
             ResultSet resultado = st.executeQuery();
