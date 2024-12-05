@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y Tabla de Datos</title>
+    <link rel="stylesheet" href="viaje.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+            <li><a href="../index.html">Usuarios</a></li>
+            <li><a href="../restaurante/restaurante.html">Restaurantes</a></li>
+            <li><a href="viaje.html">viajes</a></li>
+            <li><a href="../Actividad/actividad.html">Actividades</a></li>
+        </ul>
+        </nav>
+    </div>
+
+
+    <div class="form-container">
+        <h2>Viajes con eventos</h2>
+        <form id="eventoForm">
+            <div class="form-group">
+                <label for="evento">Tipo Evento:</label>
+                <select id="evento" name="evento" >
+                    <option value="">Tipo de Evento</option>
+                    <option value="Recital">Recital</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Teatro">Teatro</option>
+                </select>
+            </div>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
+    <table id="resultTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Transporte</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Destino</th>
+                <th>Nombre Evento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos serán insertados aquí dinámicamente -->
+        </tbody>
+    </table>
+    <script src="viaje.js"></script>
+</body>
+</html>

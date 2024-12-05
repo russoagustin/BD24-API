@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y Tabla de Datos</title>
+    <link rel="stylesheet" href="actividad.css">
+    <script defer src="actividad.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Usuarios</a></li>
+                <li><a href="../restaurante/restaurante.html">Restaurantes</a></li>
+                <li><a href="../viaje/viaje.html">viajes</a></li>
+                <li><a href="actividad.html">Actividades</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="form-container">
+        <form id="lugarForm">
+            <div class="form-group">
+                <label for="dni">Tugar Turístico:</label>
+                <select id="lugar" name="lugar" >
+                    <option value="">seleccione Lugar Turístico</option>
+                    <option value="Tafí del valle">Tafí del Valle</option>
+                    <option value="Casa Histórica">Casa Histórica</option>
+                    <option value="Museo Miguel Lillo">Museo Miguel Lillo</option>
+                </select>
+            </div>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    
+    <div class="card-container">
+        <!-- Las tarjetas serán generadas dinámicamente aquí -->
+    </div>
+    
+</body>
+</html>
