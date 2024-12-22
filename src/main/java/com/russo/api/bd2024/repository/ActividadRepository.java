@@ -1,21 +1,15 @@
 package com.russo.api.bd2024.repository;
 
+import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+@Repository
 public class ActividadRepository {
-    private static ActividadRepository instance;
-    private ActividadRepository(){
-    }
-    public static ActividadRepository getInstance(){
-        if (instance == null){
-            instance = new ActividadRepository();
-        }
-        return instance;
-    }
 
     public Optional<List<Map<String,Object>>> getActividadPorLugar(String lugar) throws SQLException {
         Connection con = Conexion.conexion();

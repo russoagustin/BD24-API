@@ -1,23 +1,15 @@
 package com.russo.api.bd2024.repository;
 
+import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+@Repository
 public class RestauranteRepository {
-
-    private static RestauranteRepository instance;
-
-    private RestauranteRepository(){}
-
-    public static RestauranteRepository getInstance() {
-        if (instance == null){
-            instance = new RestauranteRepository();
-        }
-        return instance;
-    }
 
     public Optional<List<Map<String,Object>>> getRestaurantes() throws SQLException {
         Connection con = Conexion.conexion();

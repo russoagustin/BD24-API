@@ -1,35 +1,30 @@
 package com.russo.api.bd2024.repository;
 
+import com.russo.api.bd2024.dto.UsuarioDTO;
+import org.springframework.stereotype.Repository;
+
 import java.sql.*;
 import java.util.*;
 
+@Repository
 public class UsuarioRepository {
-    private static UsuarioRepository instance;
-    private UsuarioRepository(){
-    }
 
-    public static UsuarioRepository getInstance(){
-        if(instance == null){
-            instance = new UsuarioRepository();
-        }
-        return instance;
-    }
-
-    public Optional<Map<String,Object>> findById(Integer id) throws SQLException {
+    public Optional<UsuarioDTO> findById(Integer id) throws SQLException {
         Connection con = Conexion.conexion();
-        Optional<Map<String,Object>> usuarioOptional = Optional.empty();
+        Optional<UsuarioDTO> usuarioOptional = Optional.empty();
         String stringQuery = "CALL obtener_usuario(?)";
         try {
             PreparedStatement st = con.prepareStatement(stringQuery);
             st.setInt(1,id);
             ResultSet resultado = st.executeQuery();
             if (resultado.next()) {
-                Map<String,Object> usuario = new HashMap<>();
-                usuario.put("nombre",resultado.getString("nombre"));
-                usuario.put("apellido",resultado.getString("apellido"));
-                usuario.put("email",resultado.getString("email"));
-                usuario.put("user_name",resultado.getString("user_name"));
-                usuario.put("ocupacion",resultado.getString("ocupacion"));
+                UsuarioDTO usuario = new UsuarioDTO(
+                        resultado.getString("nombre"),
+                        resultado.getString("apellido"),
+                        resultado.getString("email"),
+                        resultado.getString("user_name"),
+                        resultado.getString("ocupacion")
+                );
                 usuarioOptional = Optional.of(usuario);
             }
             st.close();
@@ -39,30 +34,37 @@ public class UsuarioRepository {
         return usuarioOptional;
     }
 
-    public Optional<List<Map<String,Object>>> getUsuarios() throws SQLException {
+    public Optional<List<UsuarioDTO>> getUsuarios() throws SQLException {
         Connection con = Conexion.conexion();
-        List<Map<String,Object>> listaUsuarios = new ArrayList<>();
-        Optional<List<Map<String,Object>>> listaUsuariosOptional = Optional.empty();
-        Optional<Map<String,Object>> usuarioOptional = Optional.empty();
+        List<UsuarioDTO> listaUsuarios = new ArrayList<>();
+        Optional<List<UsuarioDTO>> listaUsuariosOptional;
         String stringQuery = "CALL obtener_usuario(NULL)";
         try {
             PreparedStatement st = con.prepareStatement(stringQuery);
             ResultSet resultado = st.executeQuery();
             while (resultado.next()) {
-                Map<String,Object> usuario = new HashMap<>();
-                usuario.put("nombre",resultado.getString("nombre"));
-                usuario.put("apellido",resultado.getString("apellido"));
-                usuario.put("email",resultado.getString("email"));
-                usuario.put("user_name",resultado.getString("user_name"));
-                usuario.put("ocupacion",resultado.getString("ocupacion"));
+                UsuarioDTO usuario = new UsuarioDTO(
+                        resultado.getString("nombre"),
+                        resultado.getString("apellido"),
+                        resultado.getString("email"),
+                        resultado.getString("user_name"),
+                        resultado.getString("ocupacion")
+                );
                 listaUsuarios.add(usuario);
-                usuarioOptional = Optional.of(usuario);
             }
-            listaUsuariosOptional = Optional.of(listaUsuarios);
+
             st.close();
+
+            if (listaUsuarios.isEmpty()){
+                listaUsuariosOptional = Optional.empty();
+            }else {
+                listaUsuariosOptional = Optional.of(listaUsuarios);
+            }
         } finally {
             Conexion.closeConnection(con);
         }
+
+
         return listaUsuariosOptional;
     }
 

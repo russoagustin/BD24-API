@@ -1,6 +1,7 @@
 package com.russo.api.bd2024.controllers;
 
 import com.russo.api.bd2024.repository.ViajeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,8 @@ import java.util.Optional;
 @RequestMapping("BD2024")
 public class ViajeController {
 
-    private ViajeRepository repository = ViajeRepository.getInstance();
+    @Autowired
+    private ViajeRepository repository;
 
     @GetMapping("/Viaje")
     ResponseEntity<List<Map<String,Object>>> getViajesTipoEvento(@RequestParam(required = false) String tipoEvento) throws SQLException {

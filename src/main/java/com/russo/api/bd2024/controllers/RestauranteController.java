@@ -1,6 +1,7 @@
 package com.russo.api.bd2024.controllers;
 
 import com.russo.api.bd2024.repository.RestauranteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,9 @@ import java.util.Optional;
 @RequestMapping("BD2024")
 public class RestauranteController {
 
-    private RestauranteRepository repository = RestauranteRepository.getInstance();
+    @Autowired
+    private RestauranteRepository repository;
+
     @GetMapping("/Restaurante")
     ResponseEntity<List<Map<String, Object>>> findRestaurantes(@RequestParam(required = false) String tipo) throws SQLException {
         Optional<List<Map<String,Object>>> restaurantesOptional;

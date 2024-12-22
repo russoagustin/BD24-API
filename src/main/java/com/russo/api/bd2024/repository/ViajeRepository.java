@@ -1,22 +1,15 @@
 package com.russo.api.bd2024.repository;
 
+import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+@Repository
 public class ViajeRepository {
-    private static ViajeRepository instance;
-    private ViajeRepository(){
-    }
-
-    public static ViajeRepository getInstance(){
-        if(instance == null){
-            instance = new ViajeRepository();
-        }
-        return instance;
-    }
 
     public Optional<List<Map<String,Object>>> getViajesPorEvento(String tipoEvento) throws SQLException {
         Connection con = Conexion.conexion();
