@@ -7,9 +7,10 @@ import java.sql.*;
 import java.util.*;
 
 @Repository
-public class UsuarioRepository {
+public class UsuarioRepository implements IUsuarioRepository{
 
-    public Optional<UsuarioDTO> findById(Integer id) throws SQLException {
+    @Override
+    public Optional<UsuarioDTO> findByDNI(Integer id) throws SQLException {
         Connection con = Conexion.conexion();
         Optional<UsuarioDTO> usuarioOptional = Optional.empty();
         String stringQuery = "CALL obtener_usuario(?)";
@@ -34,6 +35,7 @@ public class UsuarioRepository {
         return usuarioOptional;
     }
 
+    @Override
     public Optional<List<UsuarioDTO>> getUsuarios() throws SQLException {
         Connection con = Conexion.conexion();
         List<UsuarioDTO> listaUsuarios = new ArrayList<>();
