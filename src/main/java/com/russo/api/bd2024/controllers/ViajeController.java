@@ -1,6 +1,8 @@
 package com.russo.api.bd2024.controllers;
 
+import com.russo.api.bd2024.dto.ViajeDTO;
 import com.russo.api.bd2024.repository.ViajeRepository;
+import com.russo.api.bd2024.services.ViajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,15 +19,16 @@ import java.util.Optional;
 public class ViajeController {
 
     @Autowired
-    private ViajeRepository repository;
+    private ViajeService service;
 
     @GetMapping("/Viaje")
-    ResponseEntity<List<Map<String,Object>>> getViajesTipoEvento(@RequestParam(required = false) String tipoEvento) throws SQLException {
-        Optional<List<Map<String,Object>>> lista = repository.getViajesPorEvento(tipoEvento);
-        if (lista.isPresent()){
-            return ResponseEntity.ok(lista.get());
-        }else{
-            return ResponseEntity.notFound().build();
+    ResponseEntity<List<ViajeDTO>> getViajesTipoEvento(@RequestParam(required = false) String tipoEvento) {
+        Optional<List<ViajeDTO>> lista = null;
+        try {
+            lista = service.getViajesPorEvento(tipoEvento);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return lista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
