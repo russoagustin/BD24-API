@@ -1,7 +1,7 @@
 package com.russo.api.bd2024.services;
 
 import com.russo.api.bd2024.dto.UsuarioDTO;
-import com.russo.api.bd2024.repository.UsuarioRepository;
+import com.russo.api.bd2024.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements IUsuarioService {
 
     @Autowired
-    private UsuarioRepository repository;
+    private IUsuarioRepository repository;
 
+    @Override
     public Optional<UsuarioDTO> findByDNI(Integer dni) throws SQLException {
         return repository.findByDNI(dni);
     }
 
+    @Override
     public Optional<List<UsuarioDTO>> getUsuarios() throws SQLException {
         return repository.getUsuarios();
     }

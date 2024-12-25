@@ -1,6 +1,6 @@
 package com.russo.api.bd2024.controllers;
 import com.russo.api.bd2024.dto.UsuarioDTO;
-import com.russo.api.bd2024.services.UsuarioService;
+import com.russo.api.bd2024.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class UsuariosController {
 
     @Autowired
-    private UsuarioService service;
+    private IUsuarioService service;
 
     @GetMapping("/usuario/{id}")
     ResponseEntity<UsuarioDTO> findUsuario(@PathVariable Integer id)  {

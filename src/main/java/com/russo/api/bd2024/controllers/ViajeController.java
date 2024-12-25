@@ -1,8 +1,7 @@
 package com.russo.api.bd2024.controllers;
 
 import com.russo.api.bd2024.dto.ViajeDTO;
-import com.russo.api.bd2024.repository.ViajeRepository;
-import com.russo.api.bd2024.services.ViajeService;
+import com.russo.api.bd2024.services.IViajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,7 @@ import java.util.Optional;
 public class ViajeController {
 
     @Autowired
-    private ViajeService service;
+    private IViajeService service;
 
     @GetMapping("/Viaje")
     ResponseEntity<List<ViajeDTO>> getViajesTipoEvento(@RequestParam(required = false) String tipoEvento) {
