@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ViajeService {
+public class ViajeService implements IViajeService {
 
     @Autowired
     private IViajeRepository repository;
