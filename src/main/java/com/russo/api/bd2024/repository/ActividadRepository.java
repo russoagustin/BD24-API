@@ -1,5 +1,6 @@
 package com.russo.api.bd2024.repository;
 
+import com.russo.api.bd2024.dto.ActividadDTO;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -9,12 +10,13 @@ import java.sql.SQLException;
 import java.util.*;
 
 @Repository
-public class ActividadRepository {
+public class ActividadRepository implements IActividadRepository {
 
-    public Optional<List<Map<String,Object>>> getActividadPorLugar(String lugar) throws SQLException {
+    @Override
+    public Optional<List<ActividadDTO>> getActividadPorLugar(String lugar) throws SQLException {
         Connection con = Conexion.conexion();
-        List<Map<String,Object>> listaActividad = new ArrayList<>();
-        Optional<List<Map<String,Object>>> listaActividadOptional = Optional.empty();
+        List<ActividadDTO> listaActividad = new ArrayList<>();
+        Optional<List<ActividadDTO>> listaActividadOptional = Optional.empty();
         String stringQuery;
         if(lugar==null){
             stringQuery = "CALL actividad_por_lugar_api(NULL)";
@@ -28,13 +30,14 @@ public class ActividadRepository {
             }
             ResultSet resultado = st.executeQuery();
             while (resultado.next()) {
-                Map<String,Object> actividad = new HashMap<>();
-                actividad.put("id",resultado.getString("idActividad"));
-                actividad.put("actividad",resultado.getString("nombre"));
-                actividad.put("descripcion",resultado.getString("descripcion"));
-                actividad.put("hora",resultado.getString("hora_inicio"));
-                actividad.put("lugar",resultado.getString("lugar"));
-                actividad.put("url",resultado.getString("url"));
+                ActividadDTO actividad = new ActividadDTO(
+                        resultado.getLong("idActividad"),
+                        resultado.getString("nombre"),
+                        resultado.getString("descripcion"),
+                        resultado.getString("hora_inicio"),
+                        resultado.getString("lugar"),
+                        resultado.getString("url")
+                );
                 listaActividad.add(actividad);
             }
             listaActividadOptional = Optional.of(listaActividad);

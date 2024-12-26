@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUsuarioRepository {
-    public Optional<UsuarioDTO> findByDNI(Integer id) throws SQLException;
+    Optional<UsuarioDTO> findByDNI(Integer id) throws SQLException;
 
-    public Optional<List<UsuarioDTO>> getUsuarios() throws SQLException;
+    Optional<List<UsuarioDTO>> getUsuarios() throws SQLException;
 }

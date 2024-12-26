@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IRestauranteRepository {
-    public Optional<List<RestauranteDTO>> getRestaurantes() throws SQLException;
-    public Optional<List<RestauranteDTO>> getRestaurantes(String tipo) throws SQLException;
+    Optional<List<RestauranteDTO>> getRestaurantes() throws SQLException;
+    Optional<List<RestauranteDTO>> getRestaurantes(String tipo) throws SQLException;
 }
