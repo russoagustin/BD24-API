@@ -16,12 +16,20 @@ public class UsuarioService implements IUsuarioService {
     private IUsuarioRepository repository;
 
     @Override
-    public Optional<UsuarioDTO> findByDNI(Integer dni) throws SQLException {
-        return repository.findByDNI(dni);
+    public Optional<UsuarioDTO> findByDNI(Integer dni) {
+        try {
+            return repository.findByDNI(dni);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public Optional<List<UsuarioDTO>> getUsuarios() throws SQLException {
-        return repository.getUsuarios();
+    public Optional<List<UsuarioDTO>> getUsuarios() {
+        try {
+            return repository.getUsuarios();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

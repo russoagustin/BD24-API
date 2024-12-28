@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IViajeService {
-    Optional<List<ViajeDTO>> getViajesPorEvento(String tipoEvento) throws SQLException;
+    Optional<List<ViajeDTO>> getViajesPorEvento(String tipoEvento);
 }

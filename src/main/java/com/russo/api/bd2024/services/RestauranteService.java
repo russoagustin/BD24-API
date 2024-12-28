@@ -16,12 +16,20 @@ public class RestauranteService implements IRestauranteService{
     IRestauranteRepository repository;
 
     @Override
-    public Optional<List<RestauranteDTO>> getRestaurantes() throws SQLException {
-        return repository.getRestaurantes();
+    public Optional<List<RestauranteDTO>> getRestaurantes() {
+        try {
+            return repository.getRestaurantes();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public Optional<List<RestauranteDTO>> getRestaurantes(String tipo) throws SQLException {
-        return repository.getRestaurantes(tipo);
+    public Optional<List<RestauranteDTO>> getRestaurantes(String tipo) {
+        try {
+            return repository.getRestaurantes(tipo);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

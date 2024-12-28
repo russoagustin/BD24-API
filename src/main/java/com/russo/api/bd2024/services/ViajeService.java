@@ -15,7 +15,11 @@ public class ViajeService implements IViajeService {
     @Autowired
     private IViajeRepository repository;
 
-    public Optional<List<ViajeDTO>> getViajesPorEvento(String tipoEvento) throws SQLException {
-        return repository.getViajesPorEvento(tipoEvento);
+    public Optional<List<ViajeDTO>> getViajesPorEvento(String tipoEvento) {
+        try {
+            return repository.getViajesPorEvento(tipoEvento);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

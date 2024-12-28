@@ -3,14 +3,12 @@ package com.russo.api.bd2024.controllers;
 import com.russo.api.bd2024.dto.ActividadDTO;
 import com.russo.api.bd2024.services.IActividadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +21,7 @@ public class ActividadController {
 
     @GetMapping("/actividad")
     public ResponseEntity<List<ActividadDTO>> obtenerViajes(@RequestParam(required = false) String lugar) {
-        Optional<List<ActividadDTO>> listaOptional;
-        try {
-            listaOptional = service.getActividadPorLugar(lugar);
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
-        }
+        Optional<List<ActividadDTO>> listaOptional = service.getActividadPorLugar(lugar);
         return listaOptional.isPresent() ?
                 ResponseEntity.ok(listaOptional.get()) : ResponseEntity.notFound().build();
     }

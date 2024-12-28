@@ -23,13 +23,7 @@ public class ViajeController {
 
     @GetMapping("/Viaje")
     public ResponseEntity<List<ViajeDTO>> getViajesTipoEvento(@RequestParam(required = false) String tipoEvento) {
-        Optional<List<ViajeDTO>> lista;
-        try {
-            lista = service.getViajesPorEvento(tipoEvento);
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(null);
-        }
+        Optional<List<ViajeDTO>> lista = service.getViajesPorEvento(tipoEvento);
         return lista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
