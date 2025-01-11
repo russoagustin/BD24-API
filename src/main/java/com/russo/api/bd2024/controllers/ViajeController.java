@@ -24,6 +24,10 @@ public class ViajeController {
     @GetMapping("/Viaje")
     public ResponseEntity<List<ViajeDTO>> getViajesTipoEvento(@RequestParam(required = false) String tipoEvento) {
         Optional<List<ViajeDTO>> lista = service.getViajesPorEvento(tipoEvento);
-        return lista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        if (tipoEvento.isEmpty())
+            return ResponseEntity.ok(lista.get()); //si se pide la lista completa siempre devuelve 200O K
+
+        return lista.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build()); //cuando se pide un tipo de evento especifico el cual no está en la BD defuelve un 404 NOT FOUD
     }
 }
+

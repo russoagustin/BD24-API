@@ -1,59 +1,40 @@
 package com.russo.api.bd2024.repository;
 
 import com.russo.api.bd2024.dto.ViajeDTO;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.*;
 
 @Repository
 public class ViajeRepository implements IViajeRepository{
 
-    @Override
-    public Optional<List<ViajeDTO>> getViajesPorEvento(String tipoEvento) throws SQLException {
-        Connection con = Conexion.conexion();
+    private final JdbcTemplate jdbcTemplate;
 
-        List<ViajeDTO> listaEventos = new ArrayList<>();
-        Optional<List<ViajeDTO>> listaEventoOptional = Optional.empty();
-
-        String stringQuery;
-        if(tipoEvento.isEmpty()){
-            stringQuery = "CALL obtener_viajes_tipo_evento(NULL)";
-        }else {
-            stringQuery = "CALL obtener_viajes_tipo_evento(?)";
-        }
-        try {
-            PreparedStatement st = con.prepareStatement(stringQuery);
-            if (!tipoEvento.isEmpty()) {
-                st.setString(1, tipoEvento);
-            }
-
-            ResultSet resultado = st.executeQuery();
-            while (resultado.next()) {
-                ViajeDTO viaje = new ViajeDTO(
-                        resultado.getInt("id"),
-                        resultado.getString("transporte"),
-                        resultado.getString("inicio"),
-                        resultado.getString("fin"),
-                        resultado.getString("destino"),
-                        resultado.getString("evento")
-                );
-                listaEventos.add(viaje);
-            }
-            st.close();
-
-        } finally {
-            Conexion.closeConnection(con);
-        }
-        if (listaEventos.isEmpty()){
-            return Optional.empty();
-        }
-
-        listaEventoOptional = Optional.of(listaEventos);
-        return listaEventoOptional;
+    public ViajeRepository(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate=jdbcTemplate;
     }
+
+    //Defino el mapeo del DTO con el resultado de la query
+    private RowMapper<ViajeDTO> viajeDTORowMapper = ((rs, rowNum) -> new ViajeDTO(
+            rs.getInt("id"),
+            rs.getString("transporte"),
+            rs.getString("inicio"),
+            rs.getString("fin"),
+            rs.getString("destino"),
+            rs.getString("evento")
+    ));
+
+    @Override
+    public Optional<List<ViajeDTO>> getViajesPorEvento(String tipoEvento) {
+        if (tipoEvento.isEmpty()){
+            String sql = "CALL obtener_viajes_tipo_evento(NULL)";
+            return Optional.of(jdbcTemplate.query(sql, viajeDTORowMapper));
+        }else {
+            String sql = "CALL obtener_viajes_tipo_evento(?)";
+            return Optional.of(jdbcTemplate.query(sql, viajeDTORowMapper,tipoEvento));
+        }
+    }
+
 }
