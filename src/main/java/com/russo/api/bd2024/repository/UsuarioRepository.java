@@ -25,7 +25,7 @@ public class UsuarioRepository implements IUsuarioRepository{
     ));
     @Override
     public Optional<UsuarioDTO> findByDNI(Integer id) {
-        String sql = "CALL obtener_usuario(?)";
+        String sql = "CALL obtener_usuario(?)"; //Sored Procedure de la base de datos.
         return Optional.ofNullable(jdbcTemplate.queryForObject(sql,usuarioDTORowMapper,id));
     }
 

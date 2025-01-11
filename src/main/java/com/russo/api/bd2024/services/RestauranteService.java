@@ -16,20 +16,9 @@ public class RestauranteService implements IRestauranteService{
     IRestauranteRepository repository;
 
     @Override
-    public Optional<List<RestauranteDTO>> getRestaurantes() {
-        try {
-            return repository.getRestaurantes();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public Optional<List<RestauranteDTO>> getRestaurantes(String tipo) {
-        try {
+    public List<RestauranteDTO> getRestaurantes(String tipo) {
+        if (tipo!=null)
             return repository.getRestaurantes(tipo);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return repository.getRestaurantes();
     }
 }

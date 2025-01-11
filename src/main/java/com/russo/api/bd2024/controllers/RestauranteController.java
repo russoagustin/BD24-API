@@ -21,15 +21,7 @@ public class RestauranteController {
 
     @GetMapping("/Restaurante")
     public ResponseEntity<List<RestauranteDTO>> findRestaurantes(@RequestParam(required = false) String tipo) {
-        Optional<List<RestauranteDTO>> restaurantesOptional;
-        if (tipo == null) {
-            restaurantesOptional = service.getRestaurantes();
-        } else {
-            restaurantesOptional = service.getRestaurantes(tipo);
-        }
-        return restaurantesOptional
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(service.getRestaurantes(tipo));
     }
 
 }
