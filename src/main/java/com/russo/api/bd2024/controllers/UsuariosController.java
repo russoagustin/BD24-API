@@ -23,8 +23,7 @@ public class UsuariosController {
 
     @GetMapping("/usuario/")
     public ResponseEntity<List<UsuarioDTO>> getUsuarios()  {
-        Optional<List<UsuarioDTO>> listaUsuariosOptional = service.getUsuarios();
-        return listaUsuariosOptional.isPresent() ?
-                ResponseEntity.ok(listaUsuariosOptional.get()) : ResponseEntity.notFound().build();
+        List<UsuarioDTO> listaUsuarios = service.getUsuarios();
+        return ResponseEntity.ok(listaUsuarios);
     }
 }

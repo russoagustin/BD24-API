@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface IUsuarioService {
     Optional<UsuarioDTO> findByDNI(Integer dni);
-    Optional<List<UsuarioDTO>> getUsuarios();
+    List<UsuarioDTO> getUsuarios();
 }
