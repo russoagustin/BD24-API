@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IActividadRepository {
-    Optional<List<ActividadDTO>> getActividadPorLugar(String lugar) throws SQLException;
+    List<ActividadDTO> getActividadPorLugar(String lugar);
 }

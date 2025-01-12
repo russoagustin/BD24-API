@@ -21,8 +21,6 @@ public class ActividadController {
 
     @GetMapping("/actividad")
     public ResponseEntity<List<ActividadDTO>> obtenerViajes(@RequestParam(required = false) String lugar) {
-        Optional<List<ActividadDTO>> listaOptional = service.getActividadPorLugar(lugar);
-        return listaOptional.isPresent() ?
-                ResponseEntity.ok(listaOptional.get()) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(service.getActividadPorLugar(lugar));
     }
 }

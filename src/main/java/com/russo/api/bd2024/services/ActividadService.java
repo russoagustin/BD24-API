@@ -5,9 +5,7 @@ import com.russo.api.bd2024.repository.IActividadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ActividadService implements IActividadService {
@@ -16,11 +14,7 @@ public class ActividadService implements IActividadService {
     IActividadRepository repository;
 
     @Override
-    public Optional<List<ActividadDTO>> getActividadPorLugar(String lugar) {
-        try {
-            return repository.getActividadPorLugar(lugar);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public List<ActividadDTO> getActividadPorLugar(String lugar) {
+        return repository.getActividadPorLugar(lugar);
     }
 }
